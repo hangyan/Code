@@ -7,3 +7,8 @@ Collects of some useful code.
 * cpp
 * perl
 * json
+* socket
+* pthread
+* haskell
+* javacc
+
