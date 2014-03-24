@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{fontspec, xunicode, xltxtra}
+\usepackage{listings}
+\setmainfont{Hiragino Sans GB} 
+\title{flume 测试环境使用文档}
+\author{Hang Yan}
+
+\begin{document}
+\maketitle
+\newpage
+\section{简介}
+flume是结构化日志的传输通道，集成结构化日志客户端的组件，将日志发送给本机部署的flume后，本机的flume再发往hadoop集群内部的汇聚层flume,最终写入集群
+并发送给solr建立索引(云知道)。搭建测试环境时，本机的flume收到结构化日志数据后，不再发往远端，而是直接写入本地磁盘模拟线上存储过程. \\
+由于flume传输的数据均为序列化后的二进制数据，所以写到本地的日志文件时不可读的，需要用avro工具将其转化为json数据查看。
+\section{依赖}
+\subsection{jdk}
+flume是java程序(windows任务管理器的程序名即为java。测试机上需要有完整的jdk环境.
+\subsection{chmod}
+测试flume模拟了线上写入hadoop集群的操作。中间对文件的操作需要调用linux上的chmod命令。linux上自带此命令，windows上如果有cygwin或者git环境的话其所带的bin
+目录下也会有此程序，将其加入环境变量中的PATH即可。
+
+\section{启动}
+\subsection{windows}
+如果jdk版本为1.6.31的话，将整个jdk1.6.0\_31/目录拷贝至apache-flume-1.5.0-SNAPSHOT-bin目录下.则直接点击run-windows.bat即可。
+如果不是以上情况，并确定java命令在系统PATH里面，则将bin/flume-ng.bat中的"jdk1.6.0\_31/bin/java.exe" 改为java.exe即可.然互点击run-windows.bat启动.
+
+\subsection{linux}
+确保java在PATH中即可，运行start.sh 即可.
+
+\section{运行}
+\subsection{文件}
+flume启动后，会在本地创建一个data目录用来缓存日志文件，logs/flume.log是正在写的flume日志.如果收到日志后并成功写到本地磁盘将会建立flume文件夹.
+如果data和flume占用空间过大，可删除这两个目录。logs下的日志文件过多的话也可删除.每次启动flume时也可删除data和flume文件夹以防止历史数据干扰。
+\subsection{页面}
+flume启动后，会启动两个端口,一个是用来接收客户端数据的4545端口。另一个是网页端口,用来展示运行时的统计信息.端口号为41414.
+此页面展示了一个json文档,推荐浏览器中安装jsonview插件查看.客户端成功连接flume后，此页面会有loglib发送的相关数据的统计.
+
+\section{日志查看}
+flume收到的日志文件最终都写在flume文件夹下,正常的目录结构是 flume/s.n/s.v/date/hour/hostname/stable/logavro.timestamp.
+s.n s.v是结构化日志的结构名称和版本号。当前是msp/1.date/hour是loglib flush接口所传入的时间戳解析出来的.hostname为flume所获取的本机主机名,
+最深层的目录包含current和stable.current是flume正在写的日志文件,所有文件名有tmp后缀，不可查看.一段时间之后会将current里面的文件移到stable里面,
+并去除'tmp'后缀.
+
+avro-tool jar包可以用来查看stable里面的的日志内容.具体命令为 \\
+\begin{lstlisting}[language=BASH]
+java -jar avro-tools.jar tojson [logavro-file]
+\end{lstlisting}
+可将输出重定向到文本文件中查看。 
+
+\section{停止}
+\subsection{windows}
+flume 的java 启动窗口,Ctrl-C y 确认即可.
+\subsection{linux}
+ps aux|grep flume 找到相关的进程号.kill -15 或kill 即可.
+
+
+
+
+\end{document}

@@ -60,7 +60,13 @@ struct foo9 {
     char c;
 };
 
-main(int argc, char *argv)
+struct foo10 {
+    int a;
+    int b;
+    char buf[];
+};
+
+int main(int argc, char **argv)
 {
     printf("sizeof(char *)        = %zu\n", sizeof(char *));
     printf("sizeof(long)          = %zu\n", sizeof(long));
@@ -78,4 +84,6 @@ main(int argc, char *argv)
     printf("sizeof(struct foo7)   = %zu\n", sizeof(struct foo7));
     printf("sizeof(struct foo8)   = %zu\n", sizeof(struct foo8));
     printf("sizeof(struct foo9)   = %zu\n", sizeof(struct foo9));
+    printf("sizeof(struct foo10)  = %zu\n", sizeof(struct foo10));
+    return 0;
 } 
