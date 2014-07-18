@@ -57,18 +57,3 @@ A breackout-style game in c++,use SDL.
     
     A echo client/server example.
 
-
-
-
-
-
-* gnuplot
-* c
-* cpp
-* perl
-* json
-* socket
-* pthread
-* haskell
-* javacc
-
