@@ -1,1 +1,1 @@
-mail_check_simple.sh
+mail/mail_check_simple.sh
