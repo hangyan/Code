@@ -34,6 +34,11 @@ A breackout-style game in c++,use SDL.
     
     a flume nodes manage script,it can deploy,restart,update ... a collection of flume nodes. "test.cfg" is a sample config file.
 
+2. mail/mail_check_simple.sh
+
+    A mail-notification for mutt(Coressponding mutt config see [mutt](https://github.com/hangyan/Config/tree/master/mail).It will extract the new mail's sender and subject from all the sub files and use *notify-send* to notify.
+    
+
 
 
 
