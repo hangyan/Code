@@ -15,13 +15,45 @@ Collects of some useful code.
 
     A script to download films from [RuiShi](http://v.sharein.us).
 
-* gnuplot
-* c
-* cpp
-* perl
-* json
-* socket
-* pthread
-* haskell
-* javacc
+#### brick
+A breackout-style game in c++,use SDL.
+
+
+#### c
+1. ctype_game
+
+    a type game in ternimal.(Linux).
+
+#### perl
+1. money.pl
+
+    a money-manager script,store the values in a file and this script will print the summary.
+
+#### sh
+1. dist.sh
+    
+    a flume nodes manage script,it can deploy,restart,update ... a collection of flume nodes. "test.cfg" is a sample config file.
+
+2. mail/mail_check_simple.sh
+
+    A mail-notification for mutt(Coressponding mutt config see [mutt](https://github.com/hangyan/Config/tree/master/mail)).It will extract the new mail's sender and subject from all the sub files and use *notify-send* to notify.
+    
+3. xmonad-notify.sh
+    
+    A notify script fro xmond.Inlcudes: new mail,low battery.
+
+
+#### tools
+1. mysql-connect
+
+    some useful functions to communicate with mysql in c.
+
+#### unix-net
+1. download-file
+
+    A download program in c.
+
+2. echo-cs
+    
+    A echo client/server example.
 
