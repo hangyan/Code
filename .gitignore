@@ -1,3 +1,6 @@
 a.out
 nohup.out
+
 ocaml/*.o
+
+java/data
