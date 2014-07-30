@@ -4,3 +4,5 @@ nohup.out
 ocaml/*.o
 
 java/data
+*.log
+*.class
