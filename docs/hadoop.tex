@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage{CJK}
+\usepackage{listings}
+\begin{CJK}{UTF8}{gkai}
+%Gummi|063|=)
+\title{\textbf{hadoop相关环境配置}}
+\author{闫航}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{hadoop单节点配置}
+官方文档里Single Node Setup一节里已经详细地介绍了配置的步骤，照做即可。下面着重讨论以下配置过程中的一些问题。
+\begin{enumerate}
+\item{\textbf{Java环境配置}} \\
+一般的LINUX法相版上都预装了openjdk，足够所用，但hadoop1.0.3建议使用$JAVA^{TM}$1.6.x,所以最好从
+Oracle官网上去下载相应的版本。如果下载的是二进制包，选择一个合适的目录直接解压即可。相关命令如下：\\
+\begin{lstlisting}
+     # cp jdk-*-bin /usr/lib/jvm 
+     # chmod a+x jdk-*-bin 
+     # ./jdk-*-bin 
+     
+\end{lstlisting}	
+然后需设置JAVA\_HOME,CLASSPATH,PATH这三个环境变量。以在用户Home目录下的.bashrc文件里设置为例，针对上面的操作相应的设置为： \\
+\begin{lstlisting}
+export JAVA_HOME=/usr/lib/jvm/jdk-*
+export CLASSPATH=$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+\end{lstlisting}
+然后:\\
+\begin{lstlisting}
+. .bashrc
+\end{lstlisting}
+使设置的变量生效。
+相应地,hadoop的配置文件里也要写明JAVA\_HOME，将conf/hadoop-env.sh里设置JAVA\_HOME的行注释掉，设置与上面相同的值即可。
+\item{\textbf{SSH设置}} \\
+大多数发行版里都已安装SSH服务，daemon程序名为sshd，即使没有，从源里安装也是很简单的。启动方式为:\\
+	\textbf{/etc/init.d/sshd start} \\
+默认情况下登录都需要密码，安装官方教程上所说方法即可配置成无密码登录。
+\item{\textbf{主机名设置}} \\
+hadoop文件系统格式化时注意输出的信息，在最后如果显示有关主机名的问题，很可能就是电脑上主机名设置不当造成的。这会造成hadoop集群的很多问题，查看日志即可得知。所以务必保证在格式化之前保证/etc/hostname,
+/etc/hosts,以及hostname命令显示的结果，还有shell提示符的结果一致。
+\item{\textbf{hadoop.tmp.dir路径设置}} \\
+可以在配置文件conf/core-site.xml里更改其值，示例：\\
+\begin{lstlisting}[language=XML]
+<property>  
+   <name>hadoop.tmp.dir</name>  
+   <value>/home/had/hadoop/data</value>  
+ <description>A base for other temporary directories.</description>
+</property>
+\end{lstlisting}
+\end{enumerate}
+
+\section{ganglia配置}
+\begin{enumerate}
+\item{\textbf{安装}} \\
+两种安装方式，一种是源码，依赖关系较多，编译着较为麻烦。所以尽量用源里面的软件包。不仅能自动解决依赖关系，而且自动生成了启动脚本，不易出错。Ubuntu10.04源里已提供了相应软件包，直接安装即可。安装后，可用如下方法启动：\\
+\textbf{/etc/init.d/ganglia-monitor start} \\ 
+\textbf{/etc/init.d/ganglia-monitor start} \\
+\item{\textbf{web前端配置}} \\
+不管是源码安装，还是在源里面安装，ganglia都提供了一个用于web显示的文件夹，源里安装的话是在/usr/share/ganglia-webfrontend里，将这个文件夹copy至apache网站的一个目录下，即可在网页进行访问，
+示例如下： \\
+\textbf{cp -r /usr/share/ganglia-webfrontend /var/www/} \\
+\textbf{chown -r www-data /var/www/ganglia-webfrontend } \\
+\textbf{ chgrp -r www-data /var/www/ganglia-webfrontend } \\
+然后即可用过URL \textit{http://127.0.0.1/ganglia-webfrontend/}访问
+\end{enumerate}
+
+\section{ganglia监控hadoop配置}
+\begin{enumerate}
+\item{\textbf{ganglia方面}} \\
+主要是修改/etc/ganglia/gmetad.conf文件，添加数据源，格式为：
+\begin{lstlisting}
+data_source "my cluster" [polling interval] address1:port ...
+\end{lstlisting}
+单节点情况下，只需添加一个数据源即可，若没有写端口，则默认为8649，所以可以这样写：
+\begin{lstlisting}
+data_source "hap" localhost
+\end{lstlisting}
+\item{\textbf{hadoop方面}} \\
+hadoop1.0.3版本的ganglia的配置文件为conf/haoop-metrics2.properties,需要做的主要是依据软件版本注释掉相应选项即可。示例：\newpage
+\begin{lstlisting}[frame=shadowbox]
+*.sink.file.class=
+org.apache.hadoop.metrics2.sink.FileSink
+
+# for Ganglia 3.1 support
+*.sink.ganglia.class=org.apache.hadoop.\
+metrics2.sink.ganglia.GangliaSink31
+*.sink.ganglia.period=10
+
+# default for supportsparse is false
+*.sink.ganglia.supportsparse=true
+*.sink.ganglia.slope=jvm.metrics.gcCount= 
+zero,jvm.metrics.memHeapUsedM=both
+*.sink.ganglia.dmax=
+jvm.metrics.threadsBlocked=
+70,jvm.metrics.memHeapUsedM=40
+
+namenode.sink.ganglia.servers=239.2.11.71:8649
+datanode.sink.ganglia.servers=239.2.11.71:8649
+jobtracker.sink.ganglia.servers=239.2.11.71:8649
+tasktracker.sink.ganglia.servers=239.2.11.71:8649
+maptask.sink.ganglia.servers=239.2.11.71:8649
+reducetask.sink.ganglia.servers=239.2.11.71:8649
+\end{lstlisting}
+
+\end{enumerate}
+
+\section{desktop配置}
+将解压后的文件夹放至webapps/datanode/目录下，然后通过 \\
+\textit{http://localhost:50075/desktop/}访问即可。
+搜索项用到了mysql的JDBC驱动，所以需将其放置于hadoop的lib目录下，从源里下载libmysql-java包
+即可下载到相应的jar文件。
+
+\section{FileSearch配置}
+\begin{enumerate}
+\item{\textbf{tomcat}} \\
+将FileSearch目录copy至tomcat6网站的根目录即可，在ubuntu上为/var/lib/wepapps/ROOT.
+URL:\textit{http://localhost:8080/FileSearch/work/index.jsp}
+\item{\textbf{mysql}} \\
+暂未改动InverseIndex的源码，所以数据库需做一些修改。SQL：
+\begin{lstlisting}[language=SQL]
+CREATE DATABASE InverseIndex;
+use InverseIndex;
+
+CREATE TABLE TableConf(
+fontTable varchar(32),
+backTable varchar(32));
+
+CREATE TABLE InverseIndex(
+keyword varchar(32),
+content varchar(1024));
+
+CREATE TABLE InverseIndex0(
+keyword varchar(32),
+content varchar(1024));
+\end{lstlisting}
+
+INSERT INTO TableConf VALUES
+('InverseIndex,InverseIndex0');
+
+\item{\textbf{运行}} \\
+\textbf{hadoop jar InverseIndex2.jar "inputpath"}
+\end{enumerate}
+
+\section{eclipse环境配置}
+将hadoop-eclipse-plugin-1.0.3.jar放至eclipse的plugin目录下即可。
+\end{CJK}
+\end{document}

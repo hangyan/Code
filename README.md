@@ -1,6 +1,6 @@
 
 ## Code ##
-Collects of some useful code.
+Collects of some useful code and docs.
 
 #### python
 ##### websites
@@ -62,3 +62,9 @@ A breackout-style game in c++,use SDL.
     
     A echo client/server example.
 
+#### docs
+All of them are tex files.
+1. hadoop
+   hadoop相关环境配置
+2. lamp
+   ubuntu上lamp相关环境配置

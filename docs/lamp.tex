@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage{CJK}
+\usepackage{listings}
+\begin{CJK}{UTF8}{gkai}
+%Gummi|063|=)
+\title{\textbf{Ubuntu10.04下LAMP相关配置}}
+\author{闫航}
+\date{July 28,2012}
+\begin{document}
+\maketitle
+
+
+\section{安装}
+ubuntu官方源里有想应软件包提供下载，图形界面下用 Synaptic Package Manager选择相应包下载即可，
+或者用命令方式也可。主要方式有两种：\\
+
+\begin{itemize}
+\item 分别安装mysql,apche,php
+\item 整体安装LAMP。Synaptic里提供了按task安装软件包的方式，选中LAMP Server安装即可。命令方式为\textbf{tasksel install lamp-server}
+\end{itemize}
+
+\section{配置}
+\begin{enumerate}
+
+\item \textbf{Apache}
+\begin{enumerate}
+\item PHP整合 \\
+默认情况下PHP模块并没有启用。Ubuntu下有两个命令可以用来动态地启用和关闭模块：\textbf{a2enmod}和
+\textbf{a2dismod}。a2enmod会显示所有可以启用的模块，输入相应的模块名字即可，重启apache后生效。安装了libapache2-mod-php5之后即可用此命令启用PHP模块。
+\end{enumerate}
+
+\item \textbf{Mysql}
+\begin{enumerate}
+\item 中文支持 \\
+需将编码设置为UTF8.可从三个层面来进行设置：\\
+一是服务器层面。需要修改my.cnf配置文件：\\
+\begin{lstlisting}
+ [mysqld] 
+ character-set-server=utf8
+ collation-server=utf8_general_ci 
+ 
+ [client]
+ character-set-server=utf8
+\end{lstlisting}
+ 
+重启mysql,然后可以在mysql里面查看相应的编码编码是否设置正确：\\
+\begin{lstlisting}
+mysql> show variables like 'character_set_%';
++--------------------------+----------------------------+
+| Variable_name            | Value                      |
++--------------------------+----------------------------+
+| character_set_client     | utf8                       |
+| character_set_connection | utf8                       |
+| character_set_database   | utf8                       |
+| character_set_filesystem | binary                     |
+| character_set_results    | utf8                       |
+| character_set_server     | utf8                       |
+| character_set_system     | utf8                       |
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+\end{lstlisting}
+二是在创建数据库的时候指定编码。例如：
+\begin{lstlisting}
+CREATE DATABASE `test` DEFAULT CHARACTER SET utf8 
+COLLATE utf8_general_ci;
+\end{lstlisting}
+三是对于已经创建好的数据库可以通过SQL语句修改其编码设定:\\
+\begin{lstlisting}
+ALTER DATABASE db CHARACTER SET utf8 COLLATE utf8_general_ci
+ALTER TABLE table CONVERT TO CHARACTER SET utf8 
+COLLATE utf8_general_ci
+\end{lstlisting}
+注意修改了数据库的编码后，原来数据库里面的表的编码并没有改变。也需手动修改。
+\end{enumerate}
+
+\item{\textbf{phpmyadmin}} \\
+phpmyadmin是一个基于web的mysql管理工具（相应的postgresql的web管理工具为phppgadmin)。
+二者是基于同样的原理。ubuntu官方源里已提供相应的包，直接下载安装即可。也可通过源码安装。源码安
+装只需将相应文件拷至apache网站目录下即可。而通过官方源安装之后相应的网页文件放置在
+/usr/share/phpmyadmin目录下，然后设置apache的网站目录即可通过URL：
+\textit{127.0.0.1/phpmyadmin}
+进行访问。
+\end{enumerate}
+
+\end{CJK}
+\end{document}
