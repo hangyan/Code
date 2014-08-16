@@ -64,7 +64,10 @@ A breackout-style game in c++,use SDL.
 
 #### docs
 All of them are tex files.
+
 1. hadoop
-   hadoop相关环境配置
+
+    hadoop相关环境配置
 2. lamp
-   ubuntu上lamp相关环境配置
+
+    ubuntu上lamp相关环境配置
