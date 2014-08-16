@@ -6,3 +6,4 @@ ocaml/*.o
 java/data
 *.log
 *.class
+README.html
