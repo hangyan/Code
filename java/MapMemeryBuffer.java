@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
 
+
 public class MapMemeryBuffer {
     public static void main(String[] args) throws Exception {
         ByteBuffer byteBuf = ByteBuffer.allocate(1024*14*1024);
@@ -32,5 +33,20 @@ public class MapMemeryBuffer {
     }
 }
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

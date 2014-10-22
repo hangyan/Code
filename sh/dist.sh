@@ -2,8 +2,8 @@
 
 ##########################################
 #  File:    distribute.sh
-#  Author:  hangyan2
-#  Email:   hangyan2@iflytek.com
+#  Author:  Hang Yan
+#  Email:   yanhangyhy@gmail.com
 #  Desc:    flume管理通用脚本.           
 #  Usage:   see Usage.
 #  Todo:    1.jdk设置

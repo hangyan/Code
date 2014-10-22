@@ -14,7 +14,8 @@ unsigned char result[MD5_DIGEST_LENGTH];
 
 struct Arg
 {
-    std::vector<std::string> file_names;    
+    std::vector<std::string> file_names;
+    std::wstringstream
 };
 
 
@@ -61,7 +62,6 @@ int main(int argc, char *argv[])
     
     
     int size = list.size();
-    
     
     if( size < DEFAULT_THREAD_NUM )
     {

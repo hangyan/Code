@@ -7,3 +7,10 @@ java/data
 *.log
 *.class
 README.html
+
+docs/*.pdf
+docs/*.aux
+docs/auto
+docs/*.html
+
+*.o

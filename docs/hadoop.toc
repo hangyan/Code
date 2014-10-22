@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}hadoop单节点配置}{1}
+\contentsline {section}{\numberline {2}ganglia配置}{3}
+\contentsline {section}{\numberline {3}ganglia监控hadoop配置}{3}
+\contentsline {section}{\numberline {4}desktop配置}{4}
+\contentsline {section}{\numberline {5}FileSearch配置}{4}
+\contentsline {section}{\numberline {6}eclipse环境配置}{5}
