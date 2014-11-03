@@ -1,0 +1,7 @@
+Year	Azerbaijan	Bangladesh	Cambodia	China	Djibouti	Egypt	Indonesia 	Iraq	LaoPDR	Myanmar	Nigeria	Pakistan	Thailand	Turkey	VietNam
+2003	0	0	0	1	0	0	0	0	0	0	0	0	0	0	3
+2004	0	0	0	0	0	0	0	0	0	0	0	0	12	0	20
+2005	0	0	4	5	0	0	13	0	0	0	0	0	2	0	19
+2006	5	0	2	8	0	10	45	2	0	0	0	0	3	4	0
+2007	0	0	1	3	0	9	37	0	2	0	1	1	0	0	5
+2008	0	0	0	3	0	3	15	0	0	0	0	0	0	0	5

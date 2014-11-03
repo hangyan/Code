@@ -1,0 +1,6 @@
+setwd("~/Code/R/RBook/")
+Deer <- read.table(file="Deer.txt", header = TRUE)
+names(Deer)
+str(Deer)
+table(Deer$Farm)
+table(Deer$Sex,Deer$Year)
