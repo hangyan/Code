@@ -1,0 +1,8 @@
+\documentclass[a4paper]{book}
+\usepackage[utf8]{inputenc}
+\title{geany test}
+\author{yuyan}
+\date{\today}
+\begin{document}
+
+\end{document}

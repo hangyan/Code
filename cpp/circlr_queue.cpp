@@ -134,7 +134,9 @@ int main(int argc, char *argv[])
     cq.insert(8);
     cq.insert(100);
     cq.display();
-    
+
+        
+        
     cq.del();
     
     cq.display();
