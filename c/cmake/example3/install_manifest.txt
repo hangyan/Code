@@ -1,0 +1,4 @@
+/usr/local/bin/Demo
+/usr/local/include/config.h
+/usr/local/bin/libMathFunctions.a
+/usr/local/include/MathFunctions.h

@@ -1,0 +1,8 @@
+[package]
+
+name = "hello_word"
+version = "0.0.1"
+authors = [ "Hang Yan <hangyan2@iflytek>"]
+
+[[bin]]
+name = "hello_world"

@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/Demo.dir/main.cc.o  -o Demo  math/libMathFunctions.a 

@@ -144,3 +144,53 @@
 		(else (+ (pascal (- row 1) (- col 1))
 				 (pascal (- row 1) col)))))
 
+;-------------------------------------------------------------------------------
+(define (expt b n)
+  (if (= n 0)
+	  1
+	  (*b (expt b (- n 1)))))
+
+(define (expt b n)
+  (expt-iter b n 1))
+
+(define (expt-iter b counter product)
+  (if (= counter 0)
+	  product
+	  (expt-iter b
+				 (- counter 1)
+				 (* b product))))
+
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+		((even? n) (square (fast-expt b (/ n 2)f)))
+		(else (* b (fast-expt b (- n 1))))))
+
+
+(define (even? n)
+  (= (remainder n 2) 0))
+;-------------------------------------------------------------------------------
+(define (gcd a b)
+  (if (= b 0)
+	  a
+	  (gcd b (remainder a b))))
+
+
+
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+		((divides? test-divisor n) test-divisor)
+		(else (find-divisor n (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+
+;;-------------------------------------------------------------------------------
+

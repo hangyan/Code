@@ -1,0 +1,15 @@
+;; This config was generated using ensime-config-gen. Feel free to customize its contents manually.
+
+(
+
+:project-name "hangyan"
+
+:project-package "org.yayu"
+
+:sources ("./src")
+
+:compile-jars ("./lib")
+
+:target "./cls"
+
+)
