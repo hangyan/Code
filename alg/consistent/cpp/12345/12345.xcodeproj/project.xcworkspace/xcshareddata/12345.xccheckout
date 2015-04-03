@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3EDAE7AE-BE8A-4381-B3E6-604B0DF22912</string>
+	<key>IDESourceControlProjectName</key>
+	<string>12345</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5289F890B1BE9F299C776E3A67678B53F8E26D4F</key>
+		<string>github.com:hangyan/Code</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>alg/consistent/cpp/12345/12345.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5289F890B1BE9F299C776E3A67678B53F8E26D4F</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:hangyan/Code</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5289F890B1BE9F299C776E3A67678B53F8E26D4F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5289F890B1BE9F299C776E3A67678B53F8E26D4F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Code</string>
+		</dict>
+	</array>
+</dict>
+</plist>
