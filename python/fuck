@@ -1,0 +1,5 @@
+[36mDEBUG   [0m [34ma debug message[0m
+[32mINFO    [0m [34man info message[0m
+[33mWARNING [0m [34ma warning message[0m
+[31mERROR   [0m [34man error message[0m
+[31mCRITICAL[0m [34ma critical message[0m
