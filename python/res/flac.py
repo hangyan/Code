@@ -64,7 +64,11 @@ def __download_link(link):
 
 def download_link(link):
     url = _encode_link(link)
-    urllib.urlretrieve(url, link.split('/')[-1])
+    name = link.split('/')[-1]
+    if os.path.isfile(name):
+        print 'Skip...'
+        return
+    urllib.urlretrieve(url, name)
 
 
 def downloads(links):
