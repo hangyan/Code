@@ -13,3 +13,10 @@ docs/auto
 docs/*.html
 
 *.o
+
+.idea/
+.DS_Store
+
+
+*.mp3
+*.flac
