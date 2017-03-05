@@ -28,6 +28,9 @@ def setup_logger():
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
+    logger.se
+
+    
 
     return logger
 
@@ -41,6 +44,7 @@ def main():
     logger.warning('a warning message')
     logger.error('an error message')
     logger.critical('a critical message')
+    logger.
 
 
 if __name__ == '__main__':
