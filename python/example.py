@@ -42,6 +42,7 @@ def main():
     logger.debug('a debug message')
     logger.info('an info message')
     logger.warning('a warning message')
+
     logger.error('an error message')
     logger.critical('a critical message')
     logger.
