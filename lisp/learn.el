@@ -1,4 +1,20 @@
-;; example code of "Programming in Emacs"
+;; example code of "Programming in Emacs" "eintr"
+
+
+;; basic
+
+(+ 2 2)
+'(fuck baidu)
+
+(message "This message appears in the echo area!")
+(message "The name of this buffer is: %s." (buffer-name))
+(message "The value of fill-column is %d." fill-column)
+(set 'flowers '(rose violet daisy buttercup))
+(buffer-name)
+(buffer-file-name)
+
+
+
 
 (defun insert-buffer (buffer)
   "Insert after point the contents of BUFFER.Puts mark after the
@@ -38,18 +54,18 @@ Goes backward if ARG is negative;error if CHAR not found."
           (if (eq last-command 'kill-region)
               (kill-append string (< end beg))
             (kill-new string)
-              )
+			)
           )
 
         (setq this-command 'kill-region))
 
     
-      )
+	)
   )
 
 
 
-;recursion
+										;recursion
 (setq animals '(gazelle giraffe lion tiger))
 (defun print-elements-recursively (list)
   "Print each element of LIST on a line of its own.Uses recursion."
@@ -59,7 +75,7 @@ Goes backward if ARG is negative;error if CHAR not found."
         (print-elements-recursively
          (cdr list))
         )
-      )
+	)
   )
 (print-elements-recursively animals)
 
@@ -69,7 +85,7 @@ Goes backward if ARG is negative;error if CHAR not found."
       1
     (+ number
        (triangle-recursively (1- number)))
-      )
+	)
   )
 (triangle-recursively 5)
 
@@ -79,7 +95,7 @@ Goes backward if ARG is negative;error if CHAR not found."
         ((> number 1)
          (+ number (triangle-using-cond (1- number)))
          )
-   )
+		)
   )
 
 (triangle-using-cond 5)
@@ -172,4 +188,4 @@ syntax table determines which characters these are."
     )
   )
 
-; count words recursively
+										; count words recursively
