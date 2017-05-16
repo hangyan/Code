@@ -1,4 +1,4 @@
-;;; emacs.el --- learn                               -*- lexical-binding: t; -*-
+;;; emacs.el --- learn                               -*- Lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  yayu
 
