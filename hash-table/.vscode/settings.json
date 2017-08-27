@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "string.h": "c",
-        "hash_table.h": "c"
-    }
-}

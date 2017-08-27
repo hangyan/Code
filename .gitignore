@@ -21,3 +21,4 @@ docs/*.html
 *.mp3
 *.flac
 *.pyc
+.vscode
