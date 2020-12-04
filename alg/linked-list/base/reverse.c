@@ -1,5 +1,6 @@
 // Iterative C program to reverse a linked list
 // link: https://www.geeksforgeeks.org/reverse-a-linked-list/
+// recur: https://www.tutorialspoint.com/c-program-for-reverse-a-linked-list
 #include <stdio.h>
 #include <stdlib.h>
  
