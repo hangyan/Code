@@ -53,6 +53,38 @@ static inline int do_trace(void* ctx, struct sk_buff* skb)
     struct ns_common* ns = member_address(net, ns);
     member_read(&evt.netns, ns, inum);
 
+
+    // address
+    char* head;
+    u16 mac_header;
+    member_read(&head, skb, head);
+    member_read(&mac_header, skb, mac_header);
+
+    #define MAC_HEADER_SIZE 14;
+    char* ip_header_address = head + mac_header + MAC_HEADER_SIZE;
+
+    u18 ip_version;
+    bpf_probe_read(&ip_version, sizeof(u8), ip_header_address);
+    ip_version = ip_versio >> 4 & 0xf;
+
+    if (ip_version != 4) {
+      return 0;
+    }
+
+    struct iphdr iphdr;
+    bpf_probe_read(&iphdr, sizeof(iphdr), ip_header_address);
+    u8 icmp_offset_from_ip_header = iphdr.ihl * 4;
+    evt.saddr[0] = iphdr.saddr;
+    evt.daddr[0] = iphdr.daddr;
+
+    // Filter ICMP packets
+    if (iphdr.protocol != IPPROTO_ICMP) {
+      return 0;
+    }
+
+
+
+
     // Send event to userland
     route_evt.perf_submit(ctx, &evt, sizeof(evt));
 
